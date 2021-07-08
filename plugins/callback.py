@@ -47,7 +47,8 @@ async def cb_handler(bot: Client, query: CallbackQuery):
     igtvcount = profile.igtvcount
     followers = profile.followers
     folllowing = profile.followees
-    today = date.today()
+    dd= date.today()
+    today=dd.strftime("%Y, %m, %d")
     
     if query.data.startswith("help"):
         await query.message.edit_text(
