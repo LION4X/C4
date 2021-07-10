@@ -49,6 +49,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
     folllowing = profile.followees
     dd= date.today()
     today=dd.strftime("%Y, %m, %d")
+    pos_f = "date_utc <=datetime({}) target".format(today)
     
     if query.data.startswith("help"):
         await query.message.edit_text(
@@ -102,7 +103,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
         m= await query.edit_message_text("Starting Downloading..\nThis may take time depending upon number of Posts.")      
         dir=f"{query.from_user.id}/{username}"
         command = [
-            "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
             "instaloader",
             "--no-metadata-json",
             "--no-compress-json",
@@ -110,6 +110,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             "--no-videos",
             "--no-captions",
             "--no-video-thumbnails",
+            "--post-filter"pos_f,
             "--login", USER,
             "-f", session,
             "--dirname-pattern", dir,
@@ -129,7 +130,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
         dir=f"{query.from_user.id}/{username}"
         today = date.today()
         command = [
-            "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
             "instaloader",
             "--no-metadata-json",
             "--no-compress-json",
@@ -137,6 +137,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             "--no-pictures",
             "--no-captions",
             "--no-video-thumbnails",
+            "--post-filter"pos_f,
             "--login", USER,
             "-f", session,
             "--dirname-pattern", dir,
@@ -168,7 +169,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
         dir=f"{query.from_user.id}/{username}"
 
         command = [
-           "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
             "instaloader",
             "--no-metadata-json",
             "--no-compress-json",
@@ -177,6 +177,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             "--igtv",
             "--no-captions",
             "--no-video-thumbnails",
+            "--post-filter"pos_f,
             "--login", USER,
             "-f", session,
             "--dirname-pattern", dir,
@@ -254,7 +255,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
         cmd, username = query.data.split("#")   
         if cmd == "feed":
             command = [
-                "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
                 "instaloader",
                 "--no-metadata-json",
                 "--no-compress-json",
@@ -270,8 +270,8 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             await download_insta(command, m, dir)
         elif cmd=="saved":
             command = [
-                "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
                 "instaloader",
+                " --post-filter=date_utc <=datetime({}) target".format(today),
                 "--no-metadata-json",
                 "--no-compress-json",
                 "--no-profile-pic",
@@ -286,7 +286,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             await download_insta(command, m, dir)
         elif cmd=="tagged":
             command = [
-                "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
                 "instaloader",
                 "--no-metadata-json",
                 "--no-compress-json",
@@ -303,7 +302,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             await download_insta(command, m, dir)
         elif cmd=="stories":
             command = [
-                "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
                 "instaloader",
                 "--no-metadata-json",
                 "--no-compress-json",
@@ -320,7 +318,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             await download_insta(command, m, dir)
         elif cmd=="fstories":
             command = [
-                "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
                 "instaloader",
                 "--no-metadata-json",
                 "--no-compress-json",
@@ -336,7 +333,6 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             await download_insta(command, m, dir)
         elif cmd=="highlights":
             command = [
-                "instaloader --post-filter=""date_utc <=datetime({}) target".format(today),
                 "instaloader",
                 "--no-metadata-json",
                 "--no-compress-json",
