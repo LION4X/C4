@@ -48,7 +48,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
     followers = profile.followers
     folllowing = profile.followees
     dd= date.today()
-    today=dd.strftime("%Y, %m, %d")
+    today=dd.strftime("%Y, %-m, %d")
     pos_f = "date_utc <=datetime({}) target".format(today)
     
     if query.data.startswith("help"):
