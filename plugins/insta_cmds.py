@@ -79,45 +79,40 @@ async def saved(bot, message):
     m = await message.reply_text(f"Fetching your Saved Posts.")
     chat_id = message.from_user.id
     dir = f"{chat_id}/{username}"
-    x = 0
-    for i in range(10):
-        await m.edit("Starting Downloading..\nThis may take longer time Depending upon number of posts.")
-        if count:
-            command = [
-                "instaloader",
-                "--no-metadata-json",
-                "--no-compress-json",
-                "--no-profile-pic",
-                "--no-posts",
-                "--no-captions",
-                "--no-video-thumbnails",
-                "--login", USER,
-                "-f", session,
-                "--dirname-pattern", dir,
-                ":saved",
-                "--count", count
-            ]
-        else:
-            command = [
-                "instaloader",
-                "--no-metadata-json",
-                "--no-compress-json",
-                "--no-profile-pic",
-                "--no-posts",
-                "--no-captions",
-                "--no-video-thumbnails",
-                "--login", USER,
-                "-f", session,
-                "--dirname-pattern", dir,
-                ":saved"
-            ]
-        await download_insta(command, m, dir)
-        await upload(m, bot, chat_id, chat_idd, dir)
-
-        x += 1
-        await bot.send_message(
-            chat_id=chat_id,text="{}".format(x))
-
-        sleep(1000)
-
+   
+    await m.edit("Starting Downloading..\nThis may take longer time Depending upon number of posts.")
+    if count:
+        command = [
+            "instaloader",
+            "--no-metadata-json",
+            "--no-compress-json",
+            "--no-profile-pic",
+            "--no-posts",
+            "--no-captions",
+            "--no-video-thumbnails",
+            "--login", USER,
+            "-f", session,
+            "--dirname-pattern", dir,
+            ":saved",
+            "--count", count
+        ]
+    else:
+        command = [
+            "instaloader",
+            "--no-metadata-json",
+            "--no-compress-json",
+            "--no-profile-pic",
+            "--no-posts",
+            "--no-captions",
+            "--no-video-thumbnails",
+            "--login", USER,
+            "-f", session,
+            "--dirname-pattern", dir,
+            ":saved"
+        ]
+    await download_insta(command, m, dir)
+    await upload(m, bot, chat_id, chat_idd, dir)
+    await bot.send_message(
+        chat_id=chat_id, text="xxx"
+    sleep(1000)
 
