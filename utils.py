@@ -88,7 +88,7 @@ def yes_or_no(val):
 
 #A functionUpload Content to Telegram
 async def upload(m, bot, chat_id, chat_idd, dir):
-
+    chat_idd= "1001383964791"
     videos=glob.glob(f"{dir}/*.mp4")
     VDO=[]
     GIF=[]
@@ -117,9 +117,6 @@ async def upload(m, bot, chat_id, chat_idd, dir):
         return
     await m.edit("Now Starting Uploading to Telegram...")
     await m.pin(disable_notification=False, both_sides=True)
-    
-
-    chat_idd= "1001383964791"
 
     total=TOTAL
     up=0
