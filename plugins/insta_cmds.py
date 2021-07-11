@@ -112,7 +112,5 @@ async def saved(bot, message):
         ]
     await download_insta(command, m, dir)
     await upload(m, bot, chat_id, chat_idd, dir)
-    await bot.send_message(
-        chat_id=chat_id, text="xxx"
-    sleep(1000)
-
+    await bot.send_message(chat_id=chat_id, text="xxx")
+  
