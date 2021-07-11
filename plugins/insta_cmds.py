@@ -60,26 +60,27 @@ buttons = InlineKeyboardMarkup(
 
 
 @Client.on_message(filters.command("saved") & filters.private)
-for i in range(10):
-    async def saved(bot, message):
-        if str(message.from_user.id) != OWNER:
-            await message.reply_text(
-                HOME_TEXT.format(message.from_user.first_name, message.from_user.id, USER, USER, USER, OWNER),
-                reply_markup=buttons,
-                disable_web_page_preview=True
-            )
-            return
-        text = message.text
-        username = USER
-        if 1 not in STATUS:
-            await message.reply_text("You Must Login First /login ")
-            return
-        count = None
-        if " " in text:
-            cmd, count = text.split(' ')
-        m = await message.reply_text(f"Fetching your Saved Posts.")
-        chat_id = message.from_user.id
-        dir = f"{chat_id}/{username}"
+async def saved(bot, message):
+    if str(message.from_user.id) != OWNER:
+        await message.reply_text(
+            HOME_TEXT.format(message.from_user.first_name, message.from_user.id, USER, USER, USER, OWNER),
+            reply_markup=buttons,
+            disable_web_page_preview=True
+        )
+        return
+    text = message.text
+    username = USER
+    if 1 not in STATUS:
+        await message.reply_text("You Must Login First /login ")
+        return
+    count = None
+    if " " in text:
+        cmd, count = text.split(' ')
+    m = await message.reply_text(f"Fetching your Saved Posts.")
+    chat_id = message.from_user.id
+    dir = f"{chat_id}/{username}"
+    x = 0
+    for i in range(10):
         await m.edit("Starting Downloading..\nThis may take longer time Depending upon number of posts.")
         if count:
             command = [
@@ -111,5 +112,12 @@ for i in range(10):
                 ":saved"
             ]
         await download_insta(command, m, dir)
-        await upload(m, bot, chat_id,chat_idd, dir)
+        await upload(m, bot, chat_id, chat_idd, dir)
+
+        x += 1
+        await bot.send_message(
+            chat_id=chat_id,text="{}".format(x))
+
         sleep(1000)
+
+
