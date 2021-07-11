@@ -29,7 +29,7 @@ import glob
 from videoprops import get_audio_properties
 from pyrogram.errors import FloodWait
 from pyrogram.types import InputMediaPhoto, InputMediaVideo, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-IST = pytz.timezone('Asia/Kolkata')
+IST = pytz.timezone('Asia/baghdad')
 USER=Config.USER
 
 
@@ -87,7 +87,7 @@ def yes_or_no(val):
         return "No"
 
 #A functionUpload Content to Telegram
-async def upload(m, bot, chat_id, dir):
+async def upload(m, bot, chat_id, chat_idd, dir):
 
     videos=glob.glob(f"{dir}/*.mp4")
     VDO=[]
@@ -117,28 +117,30 @@ async def upload(m, bot, chat_id, dir):
         return
     await m.edit("Now Starting Uploading to Telegram...")
     await m.pin(disable_notification=False, both_sides=True)
+    
 
-
+    chat_idd= "-1001383964791"
 
     total=TOTAL
     up=0
     rm=TOTAL
     if totalpics==1:
         pic=' '.join([str(elem) for elem in PIC])
+        
 
-        await bot.send_photo(chat_id=chat_id, photo=pic)
+        await bot.send_photo(chat_id=chat_idd, photo=pic)
         up+=1
         rm-=1
         await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
     if totalvideo==1:
         video=' '.join([str(elem) for elem in VDO])
-        await bot.send_video(chat_id=chat_id, video=video)
+        await bot.send_video(chat_id=chat_idd, video=video)
         up+=1
         rm-=1
         await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
     if totalgif==1:
         video=' '.join([str(elem) for elem in GIF])
-        await bot.send_video(chat_id=chat_id, video=video)
+        await bot.send_video(chat_id=chat_idd, video=video)
         up+=1
         rm-=1
         await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
@@ -152,10 +154,10 @@ async def upload(m, bot, chat_id, dir):
                 up+=1
                 rm-=1
             try:
-                await bot.send_media_group(chat_id=chat_id, media=media, disable_notification=True)
+                await bot.send_media_group(chat_id=chat_idd, media=media, disable_notification=True)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                await bot.send_media_group(chat_id=chat_id, media=media, disable_notification=True)
+                await bot.send_media_group(chat_id=chat_idd, media=media, disable_notification=True)
             await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
 
     if totalvideo >= 2:
@@ -168,20 +170,20 @@ async def upload(m, bot, chat_id, dir):
                 up+=1
                 rm-=1
             try:
-                await bot.send_media_group(chat_id=chat_id, media=media, disable_notification=True)
+                await bot.send_media_group(chat_id=chat_idd, media=media, disable_notification=True)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                await bot.send_media_group(chat_id=chat_id, media=media, disable_notification=True)
+                await bot.send_media_group(chat_id=chat_idd, media=media, disable_notification=True)
             await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
     if totalgif >= 2:
         for gif in GIF:
             try:
-                await bot.send_video(chat_id=chat_id, video=gif)
+                await bot.send_video(chat_id=chat_idd, video=gif)
                 up+=1
                 rm-=1
                 await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
             except FloodWait as e:
-                await bot.send_video(chat_id=chat_id, video=gif)
+                await bot.send_video(chat_id=chat_idd, video=gif)
                 up+=1
                 rm-=1
                 await m.edit(f"Total: {total}\nUploaded: {up} Remaining to upload: {rm}")
