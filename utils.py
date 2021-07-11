@@ -119,7 +119,7 @@ async def upload(m, bot, chat_id, chat_idd, dir):
     await m.pin(disable_notification=False, both_sides=True)
     
 
-    chat_idd= "-1001383964791"
+    chat_idd= "1001383964791"
 
     total=TOTAL
     up=0
