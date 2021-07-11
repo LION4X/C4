@@ -36,7 +36,7 @@ HELP = Config.HELP
 HOME_TEXT = Config.HOME_TEXT
 session = f"./{USER}"
 STATUS = Config.STATUS
-chat_idd = "-1001383964791"
+chat_idd = "1001383964791"
 
 insta = Config.L
 buttons = InlineKeyboardMarkup(
